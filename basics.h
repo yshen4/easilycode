@@ -26,6 +26,6 @@ int binaryheap_size(binaryheap_t *heap);
 int binaryheap_max(binaryheap_t *heap);
 int binaryheap_popmax(binaryheap_t *heap);
 void binaryheap_insert(binaryheap_t *heap, int v);
-binaryheap_t *binaryheap_new(int *data, int n, int (*compf)(int a, int b));
+binaryheap_t *binaryheap_new(int *data, int n, int (*compf)(int a, int b), bool copy);
 void binaryheap_delete(binaryheap_t **heap);
 #endif

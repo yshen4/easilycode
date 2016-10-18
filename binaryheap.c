@@ -11,6 +11,7 @@ struct binaryheap {
     int capacity;
     int size;
     int (*compare)(int a, int b);
+    bool copied;
 };
 
 static void double_buffer(binaryheap_t *heap) {
@@ -101,12 +102,16 @@ void binaryheap_insert(binaryheap_t *heap, int v) {
 }
 
 
-binaryheap_t *binaryheap_new(int *data, int n, int (*compf)(int a, int b)) {
+binaryheap_t *binaryheap_new(int *data, int n, int (*compf)(int a, int b), bool copy) {
     binaryheap_t *heap = (binaryheap_t *)calloc(1, sizeof(binaryheap_t));
     heap->capacity = n;
     heap->size = n;
-    heap->data = (int *)calloc(n, sizeof(int));
-    memcpy(heap->data, data, n * sizeof(int));
+    if (copy) {
+        heap->data = (int *)calloc(n, sizeof(int));
+        memcpy(heap->data, data, n * sizeof(int));
+        heap->copied = true;
+    }
+    else heap->data = data;
 
     if (compf) heap->compare = compf;
     else heap->compare = &default_compare;
@@ -117,7 +122,7 @@ binaryheap_t *binaryheap_new(int *data, int n, int (*compf)(int a, int b)) {
 
 void binaryheap_delete(binaryheap_t **heap) {
     if (*heap) {
-	if ((*heap)->data) free((*heap)->data);
+	if ((*heap)->copied && (*heap)->data) free((*heap)->data);
         free(*heap);
     }
     *heap = NULL;

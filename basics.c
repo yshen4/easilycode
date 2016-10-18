@@ -1,3 +1,7 @@
+/*
+gcc basics.c -g stack.c queue.c binaryheap.c -std=c99
+*/
+
 #include "basics.h"
 #include <stdio.h>
 
@@ -32,7 +36,7 @@ void test_queue() {
 
 void test_binaryheap() {
     int data[] = {1, 2, 3, 4, 5, 6};
-    binaryheap_t *heap = binaryheap_new(data, sizeof(data)/sizeof(int), NULL);
+    binaryheap_t *heap = binaryheap_new(data, sizeof(data)/sizeof(int), NULL, false);
     while(!binaryheap_isempty(heap)) {
 	int v = binaryheap_popmax(heap);
 	printf("max to heap: %d, size - %d\n", v, binaryheap_size(heap));
