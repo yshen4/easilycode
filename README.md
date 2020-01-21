@@ -7,7 +7,7 @@ Will cover the following algorith design techniques:
 - Divide and Conquer
 - Greedy Algorithms
 - Dynamic Programming
-- - Branch and Bound Algorithm
+- Branch and Bound Algorithm
 - Randomized Algorithm
 - Backtracking
 
